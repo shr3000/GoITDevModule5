@@ -14,7 +14,7 @@ public class DatabaseInitService {
         try {
             PreparedStatement statement = connection.
                     prepareStatement(ReaderQuery.readQueryFromFile("./src/main/java/sql/init_db.sql"));
-            statement.executeUpdate();
+            statement.execute();
             statement.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);

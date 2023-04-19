@@ -89,12 +89,14 @@ public class DatabaseQueryService {
     }
 
     private ResultSet getQueryResult(String path) throws SQLException {
-        ResultSet resultSet;
+        ResultSet resultSet = null;
         Connection connection = Database.getInstance().getConnection();
         String read = ReaderQuery.readQueryFromFile(path);
-         try(PreparedStatement st = connection.prepareStatement(read);) {
-            resultSet = st.getResultSet();
-        }
+         try {
+             PreparedStatement st = connection.prepareStatement(read);
+             resultSet = st.executeQuery();
+        } catch (SQLException e){}
+
         return resultSet;
     }
 
